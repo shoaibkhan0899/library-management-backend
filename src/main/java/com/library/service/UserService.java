@@ -1,5 +1,6 @@
 package com.library.service;
 import com.library.dto.LoginRequest;
+import com.library.dto.LoginResponse;
 import com.library.dto.RegisterRequest;
 import com.library.entity.User;
 import com.library.enums.Role;
@@ -45,7 +46,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public String loginUser(LoginRequest request) {
+    public LoginResponse loginUser(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid email or password"));
@@ -54,10 +55,14 @@ public class UserService {
             throw new RuntimeException("Invalid email or password");
         }
 
-        return jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getEmail());
+        return new LoginResponse(
+                "User is logged in successfully",
+                token,
+                user.getRole()
+        );
     }
 
 
 
 }
-
