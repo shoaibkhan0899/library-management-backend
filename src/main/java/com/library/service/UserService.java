@@ -4,6 +4,7 @@ import com.library.dto.LoginResponse;
 import com.library.dto.RegisterRequest;
 import com.library.entity.User;
 import com.library.enums.Role;
+import com.library.exception.EmailAlreadyRegisteredException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.library.repository.UserRepository;
@@ -28,7 +29,7 @@ public class UserService {
     public User registerUser(RegisterRequest request){
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already registered");
+            throw new EmailAlreadyRegisteredException();
         }
 
         User user = new User();
