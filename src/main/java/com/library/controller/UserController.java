@@ -3,6 +3,8 @@ package com.library.controller;
 import com.library.dto.LoginRequest;
 import com.library.dto.LoginResponse;
 import com.library.dto.RegisterRequest;
+import com.library.dto.ApiResponse;
+import com.library.dto.UserResponse;
 import com.library.entity.User;
 import com.library.service.UserService;
 import jakarta.validation.Valid;
@@ -21,14 +23,24 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(
+    public ResponseEntity<ApiResponse<UserResponse>> registerUser(
             @Valid @RequestBody RegisterRequest request) {
 
-        userService.registerUser(request);
+        User user = userService.registerUser(request);
+        UserResponse userResponse = new UserResponse(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getRole()
+        );
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body("User registered successfully");
+                .body(new ApiResponse<>(
+                        true,
+                        "User registered successfully",
+                        userResponse
+                ));
     }
 
     @PostMapping("/login")
