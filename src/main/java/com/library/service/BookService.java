@@ -42,6 +42,7 @@ public class BookService {
         existingBook.setIsbn(updatedBook.getIsbn());
         existingBook.setCategory(updatedBook.getCategory());
         existingBook.setQuantity(updatedBook.getQuantity());
+        existingBook.setImageUrl(updatedBook.getImageUrl());
 
         return bookRepository.save(existingBook);
     }

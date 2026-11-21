@@ -26,6 +26,8 @@ public class Book {
 
     private Integer quantity;
 
+    private String imageUrl;
+
     public Book() {
     }
 
@@ -75,5 +77,13 @@ public class Book {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
