@@ -1,3 +1,4 @@
+
 package com.library.dto;
 
 import com.library.enums.IssueStatus;
@@ -8,6 +9,7 @@ public record BookIssueResponse(
         Long id,
         Long userId,
         String userName,
+        String userEmail,
         Long bookId,
         String bookTitle,
         Integer quantity,

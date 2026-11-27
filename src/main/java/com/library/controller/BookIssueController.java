@@ -64,10 +64,11 @@ public class BookIssueController {
     }
 
     private BookIssueResponse toResponse(BookIssue issue) {
-        return new BookIssueResponse(
+      return  new BookIssueResponse(
                 issue.getId(),
                 issue.getUser().getId(),
                 issue.getUser().getName(),
+                issue.getUser().getEmail(),
                 issue.getBook().getId(),
                 issue.getBook().getTitle(),
                 issue.getQuantity(),

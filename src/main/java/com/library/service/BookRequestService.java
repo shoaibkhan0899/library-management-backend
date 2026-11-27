@@ -91,6 +91,11 @@ public class BookRequestService {
             throw new IllegalStateException("Only pending requests can be approved");
         }
 
+// Load User inside the active transaction
+User user = userRepository.findById(request.getUser().getId())
+        .orElseThrow(() ->
+                new EntityNotFoundException("User not found"));
+                
         Book book = bookRepository.findByIdForUpdate(request.getBook().getId())
                 .orElseThrow(() ->
                         new EntityNotFoundException(
@@ -101,7 +106,7 @@ public class BookRequestService {
 
         LocalDate issueDate = LocalDate.now();
         BookIssue issue = new BookIssue();
-        issue.setUser(request.getUser());
+        issue.setUser(user);
         issue.setBook(book);
         issue.setQuantity(request.getQuantity());
         issue.setIssueDate(issueDate);

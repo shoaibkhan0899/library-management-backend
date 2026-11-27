@@ -88,6 +88,7 @@ public class BookRequestController {
                 issue.getId(),
                 issue.getUser().getId(),
                 issue.getUser().getName(),
+                issue.getUser().getEmail(),
                 issue.getBook().getId(),
                 issue.getBook().getTitle(),
                 issue.getQuantity(),
